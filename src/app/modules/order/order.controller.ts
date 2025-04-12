@@ -2,11 +2,14 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
 import { OrderService } from './order.service';
+import AppError from '../../errors/AppErrors';
+import config from '../../config/index';
 
 const createOrder = catchAsync(async (req, res) => {
+// console.log(req.body);
   const result = await OrderService.createOrderIntoDB(req.body);
 
-  // console.log(result);
+  // console.log({result});
   sendResponse.sendCreateDataResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -14,6 +17,28 @@ const createOrder = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+const successOrder = catchAsync(async (req, res)=> {
+  const { transactionId } = req.params;
+  const result = await OrderService.successOrderIntoDB(transactionId)
+
+  
+  if( result.modifiedCount === 0 ){
+    throw new AppError(httpStatus.BAD_REQUEST, 'Order was not updated');
+  }
+return res.redirect(`${config.frontendBaseUrl}/orders`)
+})
+// fail order
+const failOrder = catchAsync(async (req, res)=> {
+  const { transactionId } = req.params;
+  const result = await OrderService.failOrderIntoDB(transactionId)
+  
+  if (result.deletedCount === 0) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete order');
+  }
+  return res.redirect(`${config.frontendBaseUrl}/orders/failed`)
+})
+
 
 const getAllOrder = catchAsync(async (req, res) => {
   const result = await OrderService.getAllOrdersFromDB(req.query);
@@ -34,7 +59,7 @@ const updateSingleOrder = catchAsync(async (req, res) => {
     success: true,
     message: 'Order Updated succesfully',
     data: result,
-  });
+  }); 
 });
 
 const deleteSingleOrder = catchAsync(async (req, res) => {
@@ -53,4 +78,6 @@ export const OrderControllers = {
   getAllOrder,
   updateSingleOrder,
   deleteSingleOrder,
+  successOrder,
+  failOrder,
 };

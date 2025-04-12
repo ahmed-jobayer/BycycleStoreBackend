@@ -8,7 +8,7 @@ const orderedItem = new Schema <TOrderedItem> ({
         type: Schema.Types.ObjectId,
         ref: 'Product',
         required:true
-    },
+    }, 
     quantity: {
         type: Number,
         required:true
@@ -35,6 +35,14 @@ const orderSchema = new Schema <TOrder>({
         type: String,
         required: true,
         enum: Status
+    },
+    transactionId: {
+        type: String
+    },
+    paymentStatus: {
+        type: String,
+        enum: ['UNPAID', 'PAID'], 
+        default: 'UNPAID'
     }
 })
 

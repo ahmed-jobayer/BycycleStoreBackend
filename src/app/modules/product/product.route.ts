@@ -14,13 +14,9 @@ router.post('/',
    validateRequest(productValidationSchema),
  ProductControllers.createABicycle);
 
-router.get('/', 
-    auth( USER_ROLE.admin,USER_ROLE.customer),
-     ProductControllers. getAllBicycles);
+router.get('/',  ProductControllers. getAllBicycles);
 
-router.get('/:id',
-    auth( USER_ROLE.admin,USER_ROLE.customer), 
-     ProductControllers.getASpecificBicycle);
+router.get('/:id',  ProductControllers.getASpecificBicycle);
 
 router.put('/:id', 
     auth(USER_ROLE.admin),
