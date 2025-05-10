@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 import { TOrder, TOrderedItem } from "./order.interface";
-import { Status } from "./order.constant";
+import { ShippingStatus } from "./order.constant";
 
 
 const orderedItem = new Schema <TOrderedItem> ({
@@ -31,10 +31,10 @@ const orderSchema = new Schema <TOrder>({
         type: Boolean,
         default: false
     },
-    status:{
+    shippinhStatus:{
         type: String,
         required: true,
-        enum: Status
+        enum: ShippingStatus
     },
     transactionId: {
         type: String

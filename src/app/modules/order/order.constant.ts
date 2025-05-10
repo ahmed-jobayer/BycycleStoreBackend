@@ -1,3 +1,3 @@
-import { TStatus } from "./order.interface";
+import { TShippingStatus } from "./order.interface";
 
-export const Status: TStatus[] = ['PENDING', 'PROCESSING', 'ON THE WAY', 'DELIVERED', 'CANCELED']
+export const ShippingStatus: TShippingStatus[] = ['PENDING', 'PROCESSING', 'DELIVERED', 'CANCELED']

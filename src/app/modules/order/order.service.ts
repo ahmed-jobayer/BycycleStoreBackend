@@ -11,13 +11,13 @@ const ssl = {
   STORE_ID: 'erger67f7cdd256d33',
   STORE_PASS: 'erger67f7cdd256d33@ssl',
   is_live: false
-} 
+}
 
 const createOrderIntoDB = async (payload: TOrder) => {
-
   const user_id = payload.user.toString()
   const DBuser = await UserServices.getSingleUser(user_id)
   const transactionId = `${uuidv4()}-${Date.now()}`
+  // console.log({ payload, DBuser, transactionId });
 
 
   const data = {
@@ -69,9 +69,10 @@ const createOrderIntoDB = async (payload: TOrder) => {
 
   const orderData = { ...payload, transactionId }
 
-
-
+  
+  // console.log({orderData,  GatewayPageURL});
   const createOrder = await Order.create(orderData);
+  // console.log("success");
 
   return {
     GatewayPageURL,
@@ -94,7 +95,7 @@ const successOrderIntoDB = async (transactionId: string) => {
   const updatedRwsult = await Order.updateOne(
     { transactionId },
     {
-      status: 'PROCESSING',
+      shippinhStatus: 'PROCESSING',
       paymentStatus: 'PAID'
     },
     { new: true }
@@ -145,7 +146,7 @@ const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
 };
 
 const updateOrderIntoDB = async (id: string, payload: Partial<TOrder>) => {
-  const status = payload.status;
+  const status = payload.shippinhStatus;
   const result = await Order.findByIdAndUpdate(id, { status }, { new: true });
   return result;
 };
