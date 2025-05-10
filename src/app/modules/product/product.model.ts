@@ -7,7 +7,7 @@ export interface Product extends Document {
   price: number;
   type: 'Mountain' | 'Road' | 'Hybrid' | 'BMX' | 'Electric';
   description: string;
-  quantity: number;
+  quantity: number; 
   inStock: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -42,7 +42,7 @@ const productSchema = new Schema<TProduct>(
     versionKey: false,
   },
 );
-
+ 
 productSchema.methods.isProductExists = async function (id: string) {
   const product = await this.model('Product').findById(id);
   return product !== null;
