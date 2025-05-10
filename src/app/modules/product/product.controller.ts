@@ -14,7 +14,7 @@ const createABicycle = catchAsync(async (req, res) => {
   const validatedData = productValidationSchema.parse({
     name,
     Img,
-    brand,
+    brand, 
     price,
     type,
     description,
