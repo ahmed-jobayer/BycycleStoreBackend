@@ -25,11 +25,11 @@ const createUser = catchAsync(async (req, res) => {
     success: true,
       message: 'Users getting successfully',
       data: result,
-    })
+    }) 
   })
   
   const getSingleUser = catchAsync(async (req, res) => {
-    console.log(req.params)
+    // console.log(req.params)
     const userId = req.params.userId
   
     const result = await UserServices.getSingleUser(userId)

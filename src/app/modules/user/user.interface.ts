@@ -9,8 +9,10 @@ export interface TUser {
   password: string;
   needsPasswordChange: boolean;
   passwordChangedAt?: Date;
-  role:  'admin' | 'customer' ;
+  role:  'admin' | 'customer' ; 
   status: 'active' | 'deactivate';
+  profileImage: string;
+  profileCover: string;
 }
 
 export interface UserModel extends Model<TUser> {

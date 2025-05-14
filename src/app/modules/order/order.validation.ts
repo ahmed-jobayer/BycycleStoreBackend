@@ -1,5 +1,5 @@
 import {  z } from "zod"
-import { Status } from "./order.constant"
+import { ShippingStatus } from "./order.constant"
 
 const orderedItemValidationSchema = z.object({
     product: z.string(),
@@ -13,7 +13,7 @@ body: z.object({
     products: z.array(orderedItemValidationSchema),
     user: z.string(),
     totalPrice: z.number(),
-    status:z.enum([...Status] as [string, ...string[]]),
+    shippingStatus:z.enum([...ShippingStatus] as [string, ...string[]]),
     isDeleted: z.boolean()
 })
 })
@@ -22,7 +22,7 @@ body: z.object({
     products: z.array(orderedItemValidationSchema).optional(),
     user: z.string().optional(),
     totalPrice: z.number().optional(),
-    status:z.enum([...Status] as [string, ...string[]]),
+    shippingStatus:z.enum([...ShippingStatus] as [string, ...string[]]),
     isDeleted: z.boolean().optional()
 })
 })

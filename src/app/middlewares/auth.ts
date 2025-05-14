@@ -28,7 +28,7 @@ const auth = (...requiredRoles:TUserRole[]) => {
   catch(err){
     throw new AppError(HttpStatus.UNAUTHORIZED, 'UNAUTHORIZED');
   }
-console.log(decode);
+// console.log(decode);
 
     const { role, email, userId, iat} = decode;
     const user = await User.findOne({ email }).select('status role'); 

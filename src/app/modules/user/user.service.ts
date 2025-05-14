@@ -41,7 +41,7 @@ const updateUser = async (id: string, data: TUser) => {
 const deleteUser = async (id: string) => {
   const result = await User.findByIdAndDelete(id)
   return result
-}
+} 
 
 export const UserServices = {
 

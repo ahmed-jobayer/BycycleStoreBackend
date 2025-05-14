@@ -18,7 +18,7 @@ const createOrderIntoDB = async (payload: TOrder) => {
   const DBuser = await UserServices.getSingleUser(user_id)
   const transactionId = `${uuidv4()}-${Date.now()}`
   // console.log({ payload, DBuser, transactionId });
-
+ 
 
   const data = {
     total_amount: payload.totalPrice,
@@ -95,7 +95,7 @@ const successOrderIntoDB = async (transactionId: string) => {
   const updatedRwsult = await Order.updateOne(
     { transactionId },
     {
-      shippinhStatus: 'PROCESSING',
+      shippingStatus: 'PROCESSING',
       paymentStatus: 'PAID'
     },
     { new: true }
@@ -146,16 +146,19 @@ const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
 };
 
 const updateOrderIntoDB = async (id: string, payload: Partial<TOrder>) => {
-  const status = payload.shippinhStatus;
-  const result = await Order.findByIdAndUpdate(id, { status }, { new: true });
+  const shippingStatus = payload.shippingStatus;
+  // console.log(shippingStatus);
+  const result = await Order.findByIdAndUpdate(id, { shippingStatus }, { new: true });
   return result;
 };
-const deleteOrderFromDB = async (id: string) => {
+const deleteOrderFromDB = async (_id: string) => {
+  // console.log({_id});
   const result = await Order.findByIdAndUpdate(
-    id,
+    _id,
     { isDeleted: true },
     { new: true },
   );
+  // console.log({result});
   return result;
 };
 

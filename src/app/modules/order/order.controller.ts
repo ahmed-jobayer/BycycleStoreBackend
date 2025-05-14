@@ -6,7 +6,7 @@ import AppError from '../../errors/AppErrors';
 import config from '../../config/index';
 
 const createOrder = catchAsync(async (req, res) => { 
-console.log("strtg",req.body);
+// console.log("strtg",req.body);
   const result = await OrderService.createOrderIntoDB(req.body);
 
   // console.log({result});
@@ -52,7 +52,8 @@ const getAllOrder = catchAsync(async (req, res) => {
 
 const updateSingleOrder = catchAsync(async (req, res) => {
   const { id } = req.params;
-
+  const fddd = req.body
+// console.log({id, fddd});
   const result = await OrderService.updateOrderIntoDB(id, req.body);
   sendResponse.sendCreateDataResponse(res, {
     statusCode: httpStatus.OK,

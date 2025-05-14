@@ -14,7 +14,7 @@ router.post(
    auth(USER_ROLE.admin),
  upload.single('file'),
 (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body);
+    // console.log(req.body);
   req.body = JSON.parse(req.body.data);
    next();
   },
@@ -25,7 +25,7 @@ router.post(
 
 router.get(
   '/:userId',
-   auth(USER_ROLE.admin),
+   auth(USER_ROLE.admin, USER_ROLE.customer),
   UserControllers.getSingleUser,);
 
   router.put(
@@ -42,5 +42,5 @@ router.get(
      auth(USER_ROLE.admin),
       UserControllers.getAllUser)
 
-
+ 
 export const UserRoutes = router;

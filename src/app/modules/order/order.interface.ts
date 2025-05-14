@@ -15,7 +15,7 @@ export type TOrder = {
     user: Types.ObjectId,
     totalPrice: number,
     isDeleted?: boolean,
-    shippinhStatus?: TShippingStatus,
+    shippingStatus?: TShippingStatus,
     transactionId?: string,
     paymentStatus?: TPaymentStatus
 }

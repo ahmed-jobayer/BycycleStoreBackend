@@ -13,4 +13,4 @@ router.delete('/:id', OrderControllers.deleteSingleOrder)
 router.post('/success/:transactionId',OrderControllers.successOrder)
 router.post('/fail/:transactionId', OrderControllers.failOrder)
 
-export const orderRoutes = router   
+export const orderRoutes = router    

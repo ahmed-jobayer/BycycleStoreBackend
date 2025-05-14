@@ -31,7 +31,7 @@ const orderSchema = new Schema <TOrder>({
         type: Boolean,
         default: false
     },
-    shippinhStatus:{
+    shippingStatus:{
         type: String,
         required: true,
         enum: ShippingStatus
